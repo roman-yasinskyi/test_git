@@ -1,0 +1,45 @@
+.container.tasks_wrapp.my-5
+  .card.bg-light.shadow.p-3.mb-5.rounded.fs-5
+    .row
+      .col
+        h2.text-center
+          = @task.name
+    .row.my-1
+      .col-sm-2
+        |  Assignee
+      .col-sm-10
+        = @assigned_user_email || '---' 
+    .row.my-1
+      .col-sm-2
+        |  Due date
+      .col-sm-10
+        div class="#{class_status_due_date(@task)}"
+          = "#{due_date(@task)}"
+    .row.my-1
+      .col-sm-2
+        |  Priority
+      .col-sm-10.d-flex.align-items-center
+        div class="priority_#{@task.priority}"
+          = @task.priority
+    .row.my-1
+      .col-sm-2
+        |  Status
+      .col-sm-10.d-flex.align-items-center
+        div class="status_#{@task.completion_status}"
+          = @task.completion_status
+    .row.my-1
+      .col-sm-2
+        |  Description
+      .col-sm-10
+        = @task.description
+  .border-bottom.pb-2
+    = link_to "Back", @board_path, class: "btn btn-outline-light"
+    = link_to "Edit", edit_task_path,
+                    class: "btn btn-outline-warning mx-2"
+    = link_to "Remove", task_path,
+                    method: :delete, class: "btn btn-outline-danger", data: { confirm: "Are you sure?" }
+.container.container-subtask
+  = render 'tasks/taskable', taskable: @task, task: @task, html_id: 'taskSubtasks'
+
+.container  
+  = render 'comments/commentable', commentable: @task, comment: @comment, html_id: 'taskComments'

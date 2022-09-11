@@ -1,0 +1,42 @@
+.container.tasks_wrapp
+  h2
+    | All tasks
+  .row.task_head
+    .col-md-2.col-lg-3.bg-light.py-1
+      | Task name
+    .col-md-2.col-lg-2.bg-light.py-1
+      | Due date
+    .col-md-2.col-lg-2.bg-light.py-1
+      | Priority
+    .col-md-2.col-lg-2.bg-light.py-1
+      | Status
+    .col-md-4.col-lg.bg-light.py-1
+      |
+  -@board.tasks.each do |task|
+    .row.my-4.task_item_row
+      .col-md-2.col-lg-3.bg-light.d-flex.align-items-center.py-1
+        = task.name
+      .col-md-2.col-lg-2.bg-light.d-flex.align-items-center.py-1
+        div class="#{class_status_due_date(task)}"
+          = "#{due_date(task)}"
+      .col-md-2.col-lg-2.bg-light.d-flex.align-items-center.py-1
+        div class="priority_#{task.priority}"
+          = task.priority
+      .col-md-2.col-lg-2.bg-light.d-flex.align-items-center.py-1
+        div class="status_#{task.completion_status}"
+          = task.completion_status
+      .col-md-4.col-lg.bg-light.d-flex.align-items-center.py-1
+        div.content-box
+          = link_to "Details", organization_board_task_path(@board.organization, @board, task.id),
+                    class: "btn btn-outline-secondary"
+
+          = link_to icon('far', 'far fa-edit fa-lg'), edit_organization_board_task_path(@board.organization, @board, task.id),
+                    class: "btn btn-outline-warning mx-2"
+
+          = link_to icon('far', 'far fa-trash-alt fa-lg'), organization_board_task_path(@board.organization, @board, task.id),
+                    class: "btn btn-outline-danger",
+                    method: :delete, data: { confirm: "Are you sure?" }
+
+  div.mt-3
+    = link_to "Add task",  new_board_task_path(@board.organization, @board, @task),
+          class: "btn btn-outline-dark btn-lg"

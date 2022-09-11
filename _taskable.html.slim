@@ -1,0 +1,27 @@
+.container.org-form.shadow-lg.mt-5.pb-3.text-dark.fs-5
+  = link_to "Add Subtasks", "##{html_id}", class: 'btn btn-outline-primary', data: {'bs-toggle': 'collapse'}
+  = tag.div class: "collapse show subtask", id: html_id do
+    = simple_form_for [@task] do |t|
+      = t.simple_fields_for [:task, taskable.tasks.build] do |f|
+       .form-inputs
+          = f.input :name, label: 'Subtask name', required: true
+          = f.input :description, label: 'Subtask description', required: true
+          .row.py-2
+            .col-md-2.mr-2
+              |Subtask Priority
+            .col-md-10
+              = f.select :priority, Task::priorities.keys
+          .row.py-2
+            .col-md-2.mr-2
+              | Subtask Status
+            .col-md-10
+              = f.select :completion_status, Task::completion_statuses.keys
+          .row.py-2
+            .col-md-2.mr-2
+              | Subtask Due date
+            .col-md-10
+              = f.datetime_field :due_date
+            br
+            .form-actions
+              = f.button :submit, "Save"
+    = render taskable.tasks.includes(:task)

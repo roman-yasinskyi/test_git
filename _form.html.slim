@@ -1,0 +1,30 @@
+.container.org-form.shadow-lg.mt-5.pb-3.text-dark.fs-5
+  = simple_form_for [:section, @task] do |f|
+    .form-inputs
+      = f.input :name, label: 'Task name', required: true
+      = f.input :description, required: true
+      .row.py-2
+        .col-md-2.mr-2
+          |Priority
+        .col-md-10
+          = f.select :priority, Task::priorities.keys
+      .row.py-2
+        .col-md-2.mr-2
+          | Status
+        .col-md-10
+          = f.select :completion_status, Task::completion_statuses.keys
+      .row.py-2
+        .col-md-2.mr-2
+          | Due date
+        .col-md-10
+          = f.datetime_field :due_date
+      .row.py-2
+        .col-md-2.mr-2
+          | Assignee
+        .col-md-10
+          = f.select :assigned_id, @board_members.map { |u| [u.email, u.id] }, include_blank: true
+
+    br
+    .form-actions
+      = f.button :submit, "Save"
+      = link_to "Back", @board_path, class: "btn btn-outline-secondary mx-3"
