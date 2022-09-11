@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+  <link rel="stylesheet" href="style.css">
+  <title>SignIn</title>
+</head>
+<body>
+  <div class="form-box">
+    <div class="form-wrap">
+      <h1>Sign In</h1>
+      <h4>Login to manage your account</h4>
+      <form action="#">
+        <div class="form-control">
+          <label class="input-label" for="input_1">Username</label>
+          <div class="input-field">
+            <input class="invalid" type="text" placeholder="Username" id="input_1">
+            <i class='bx bxs-error-circle' ></i>
+          </div>
+        </div>
+
+        <div class="form-control">
+          <label class="input-label" for="input_2">Password</label>
+          <div class="input-field">
+            <input class="invalid" type="password" placeholder="Password" id="input_2">
+            <i class='bx bxs-low-vision' ></i>
+          </div>
+        </div>
+        <div class="checkbox-content">
+          <input class="checkbox-input" type="checkbox" id="checkbox_1">
+          <label class="checkbox-label" for="checkbox_1">Remember me</label>
+        </div>
+        <div class="button-submit">
+          <input type="button" value="Sign in">
+        </div>
+        <div class="form-link">
+            <a href="#">Forgot password?</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- error message -->
+
+  <div class="error-box">
+      <div class="error-header">
+        <div class="error-header-right">
+          <i class='bx bxs-error-circle' style='color:#dc1313'></i>
+          <h2 class="error-title">Error</h2>
+        </div>
+        <i class='bx bx-x'></i>
+      </div>
+      <div class="error-text">
+       <p>Your username or password is incorrect</p> 
+      </div>
+  </div>
+</body>
+</html>
